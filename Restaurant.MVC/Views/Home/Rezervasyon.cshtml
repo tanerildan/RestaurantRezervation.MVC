@@ -1,0 +1,51 @@
+﻿@using Restaurant.DAL.Entities
+@model Rezervasyon
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Rezervasyon</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-3.0.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-6">
+                @if (ViewBag.Msg != null)
+                {
+                    <span class="alert alert-success">@ViewBag.Msg</span>
+                }
+                <div class="card-body">
+                    @using (Html.BeginForm())
+            {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label>Adınız:</label>
+                            @Html.TextBoxFor(x => x.MusteriAd, new { @class = "form-control", @type = "text", @placeholder = "Lütfen isminizi giriniz.." })
+                            <span class="text-danger">@Html.ValidationMessageFor(x => x.MusteriAd)</span>
+                            <label>Soyadınız:</label>
+                            @Html.TextBoxFor(x => x.MusteriSoyad, new { @class = "form-control", @type = "text", @placeholder = "Lütfen soyadınızı giriniz.." })
+                            <span class="text-danger">@Html.ValidationMessageFor(x => x.MusteriSoyad)</span>
+                            <label>Tel Numaranız:</label>
+                            @Html.TextBoxFor(x => x.MusteriTel, new { @class = "form-control", @type = "text", @placeholder = "Telefon numarınızı giriniz lütfen.." })
+                            <span class="text-danger">@Html.ValidationMessageFor(x => x.MusteriTel)</span>
+                            @Html.TextBox("RezGunu",DateTime.Now.ToShortDateString(),new { @class = "form-control", @type = "readonly" })
+                            @Html.Hidden("MasaId", TempData["MasaId"])
+                            @Html.Hidden("RezSaati", TempData["RezBaslangicSaati"])
+                        </div>
+
+                        <input type="submit" value="İşlemi Tamamla" class="btn btn-outline-success" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/scripts/bootstrap.min.js"></script>
+</body>
+</html>

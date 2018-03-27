@@ -1,0 +1,42 @@
+﻿@using Restaurant.DAL.Entities
+@model Masalar
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Restaurantımıza hoşgeldiniz</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-3.0.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <h2><b>Rezervasyon İşlemleri</b></h2>
+        <hr />
+        <div class="col-md-6">
+
+            @if (TempData["Msg"] != null)
+            {
+                <span class="alert alert-danger">@TempData["Msg"]</span>
+            }
+            @using (Html.BeginForm("Rezervasyon","Home",FormMethod.Get))
+            {
+                @Html.AntiForgeryToken()
+                <label style="color:burlywood"><b>Lütfen masa seçiniz.</b></label>
+                <div class="form-group">
+                    <label>Masalar:</label>
+                    @Html.DropDownList("Masalar", (IEnumerable<SelectListItem>)ViewBag.Masalar, new { @class = "form-control" })
+                    <label>Başlangıç Saati</label>
+                    @Html.DropDownList("BaslangicSaati", (IEnumerable<SelectListItem>)ViewBag.RezervasyonBasSaati, new { @class = "form-control" })
+                </div>
+                <hr />
+                <input type="submit" class="btn btn-outline-dark" value="Rezervasyon Yap" />
+            }
+
+        </div>
+    </div>
+    <script src="~/scripts/bootstrap.min.js"></script>
+</body>
+</html>

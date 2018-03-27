@@ -1,0 +1,52 @@
+﻿@using Restaurant.DAL.Entities
+@model Yonetim
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-3.0.0.min.js"></script>
+</head>
+<body>
+    <div> 
+        <div class="container">
+            <span class="alert-danger">@ViewBag.msg</span>
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label>E-posta Adresi:</label>
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @type = "email", @placeholder = "Epostanızı giriniz." })
+                            <span class="text-danger">@Html.ValidationMessageFor(x => x.Email)</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Şifre:</label>
+                            @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password", @placeholder = "Parola Giriniz." })
+                            <span class="text-danger">@Html.ValidationMessageFor(x => x.Password)</span>
+                        </div>
+                      
+
+                        <input type="submit" value="Giriş Yap" class="btn btn-primary btn-block" />
+                    }
+
+
+                    <div class="text-center">
+                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/scripts/bootstrap.min.js"></script>
+</body>
+</html>
